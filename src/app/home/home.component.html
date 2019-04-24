@@ -1,0 +1,50 @@
+<div class="container mt-4 " *ngIf="!status">
+  <h4>Restaurants Near you</h4>
+  <div class="card mt-4 mb-4 bg-light">
+    <div class="card-body">
+      <form>
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="form-group">
+              <label class="text-secondary">Searching in...</label>
+              <div class="input-group">
+                 
+                <input type="text" name="searchLocation" [(ngModel)]="searchLocation" class="form-control" placeholder="Please select your city">
+                <div class="input-group-append">
+                  <button class="input-group-text bg-white btn" (click)="searchZomatoLocation()"><i class="fas fa-location-arrow text-secondary"></i></button>
+                </div>
+                <div class="input-group-append">
+                    <button class="input-group-text bg-white btn" (click)="getLocation()"><i class="fas fa-map-marker-alt text-secondary"></i>&nbsp;Detect</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <div class="form-group">
+              <label class="text-secondary">Searching for...</label>
+              <div class="input-group"> 
+                <input type="text" name="searchRestaurant" [(ngModel)]="searchRestaurant" class="form-control" placeholder="Search for restaurants">
+                <div class="input-group-append">
+                    <button class="input-group-text bg-white btn " ><i class="fas fa-search text-secondary"></i></button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!--<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="message">
+      {{message}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>-->
+    
+  <div *ngIf="(message===undefined || message==='') && locationDetails">
+  <app-restaurant-list [lat]="locationDetails.lat" [lng]="locationDetails.lng" [restaurant]="searchRestaurant"></app-restaurant-list>
+</div>
+</div>
+<div *ngIf="status">
+    <app-error [status]="status"></app-error>
+  </div>
