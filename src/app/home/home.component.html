@@ -25,7 +25,7 @@
               <div class="input-group"> 
                 <input type="text" name="searchRestaurant" [(ngModel)]="searchRestaurant" class="form-control" placeholder="Search for restaurants">
                 <div class="input-group-append">
-                    <button class="input-group-text bg-white btn " ><i class="fas fa-search text-secondary"></i></button>
+                    <button class="input-group-text bg-white btn " (click)="searchRestaurantDetails()"><i class="fas fa-search text-secondary"></i></button>
                   </div>
               </div>
             </div>

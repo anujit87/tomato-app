@@ -103,6 +103,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
+  searchRestaurantDetails(){
+    if(!this.searchLocation){
+      this.message='Please select city'
+    }
+  }
 
 }
