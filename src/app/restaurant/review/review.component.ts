@@ -19,7 +19,7 @@ export class ReviewComponent implements OnInit {
     const restaurantId = this.route.snapshot.paramMap.get('id');
     this.zomatoService.getRestaurantReviews(restaurantId).subscribe(
       (response:{user_reviews}) => {
-        console.log(response);
+//console.log(response);
         this.reviews=response.user_reviews
         this.loading=false
       }

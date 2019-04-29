@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,11 @@ export class ZomatoService {
 
 
   constructor(private http: HttpClient) { }
+
+  private handleError=(err:HttpErrorResponse)=>{
+    console.log(err.message);
+    return Observable.throw(err.message)
+  }
 
   getRestaurants = (location:{lat,lng},skip:number,restaurant?:string) => {
     let url = 'https://developers.zomato.com/api/v2.1/search?lat='+location.lat+'&lon='+location.lng+'&start='+skip+'&count=10';

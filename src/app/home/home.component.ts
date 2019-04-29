@@ -23,12 +23,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     let city=this.route.snapshot.paramMap.get('city');
-    console.log(city);
+  //console.log(city);
     
     if(city){
       this.searchLocation=city;
       this.searchZomatoLocation();
-      console.log(this.locationDetails)
+     // console.log(this.locationDetails)
     }else{
       this.getLocation();
     }
@@ -39,17 +39,17 @@ export class HomeComponent implements OnInit {
   getLocation= () =>{
     if(navigator.geolocation){
       this.message='';
-      console.log(this.message)
+      //console.log(this.message)
       this.searchLocation=''
       navigator.geolocation.getCurrentPosition((position)=>{
-        console.log(position.coords.latitude,position.coords.longitude);
+     //console.log(position.coords.latitude,position.coords.longitude);
         const latlng={lat:position.coords.latitude,lng:position.coords.longitude};
         //this.location.emit(latlng);
         
         this.locationDetails=latlng
         this.zomatoService.getCity(latlng).subscribe(
           (response:{location_suggestions:[{name}]})=>{
-            console.log(response);
+           //console.log(response);
             this.status=null;
             //city=response.location_suggestions[0].name;
             this.searchLocation=response.location_suggestions[0].name;
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
         )
       },(error)=>{
           if(error.code === error.PERMISSION_DENIED){
-            this.message='Please provide permission to access your device location';
+            this.message='Please provide permission to access your device location or search for your city using the search box';
             this.router.navigate(['/home'])
           }
       })
@@ -87,8 +87,8 @@ export class HomeComponent implements OnInit {
             this.status=null;
             this.router.navigate(['/home', response.location_suggestions[0].city_name]);
           }else{
-            this.message='Unable to find the city you are looking for';
-            this.status=404
+            this.message='We are not yet started service in this city';
+            //this.status=404
           }
           
         },error=>{

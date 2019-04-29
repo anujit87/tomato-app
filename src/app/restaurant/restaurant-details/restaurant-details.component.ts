@@ -26,13 +26,14 @@ export class RestaurantDetailsComponent implements OnInit {
     const restaurantId=this.route.snapshot.paramMap.get('id');
     this.zomatoService.getRestaurantDetails(restaurantId).subscribe(
       (response:{location:{latitude,longitude},menu_url,name}) => {
-          console.log(response);
+          //console.log(response);
           this.restaurantDetails=response;
           this.loading=false;
       },error=>{
+        //console.log(error)
         this.message=error.error.message;
         this.loading=false;
-        this.status=403;
+        this.status=error.status;
       }
     ) 
   }

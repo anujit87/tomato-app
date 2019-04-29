@@ -1,7 +1,7 @@
 <div class="container mt-3" *ngIf="restaurantDetails && !loading">
   <div class="card mb-3">
     <img src="{{restaurantDetails.featured_image}}" class="card-img-top img-fluid" alt="..."
-      style="height:20vw; width:100%;object-fit: cover">
+      style="height:40vh; width:100%;object-fit: cover">
     <div class="card-body">
       <h2 class="card-title mb-0">{{restaurantDetails.name}} <span class="badge float-right text-white"
           [ngStyle]="{'background-color':'#'+restaurantDetails.user_rating.rating_color}">{{restaurantDetails.user_rating.aggregate_rating}}

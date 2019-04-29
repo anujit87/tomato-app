@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="d-flex justify-content-center">
-    <app-pagination (skip)="getSkip($event)"></app-pagination>
+    <app-pagination (skip)="getSkip($event)" [total]="totalResults"></app-pagination>
   </div>
 </div>
 <div class="d-flex justify-content-center" *ngIf="loading">
@@ -45,13 +45,13 @@
       <span class="sr-only">Loading...</span>
     </div>
 </div>
-<!--<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="message">
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="message">
     {{message}}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-  </div>-->
-<div *ngIf="message">
+  </div>
+<div *ngIf="status">
   <app-error [status]="status"></app-error>
 </div>
 

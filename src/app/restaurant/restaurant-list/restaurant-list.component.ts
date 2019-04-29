@@ -17,6 +17,7 @@ export class RestaurantListComponent implements OnInit, OnChanges {
   message;
   skip:number=0;
   status;
+  totalResults;
 
   constructor(private zomatoService:ZomatoService) { }
 
@@ -25,7 +26,7 @@ export class RestaurantListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes:SimpleChanges){
-    console.log(changes)
+    //console.log(changes)
     this.loading=true;
     this.getPaginatedRestaurants();
     
@@ -43,18 +44,20 @@ export class RestaurantListComponent implements OnInit, OnChanges {
       //console.log(this.restaurant)
       this.zomatoService.getRestaurants({lat:this.lat,lng:this.lng},this.skip,this.restaurant).subscribe(
         (response:any) => {
-          console.log(response);
+          //console.log(response);
           if(response.status===200){
             if(response.body.results_found>0){
               this.restaurantList = response.body.restaurants;
+              this.totalResults = response.body.results_found;
               this.loading=false;
               this.message=null;
               this.status=null;
+              window.scrollTo(0,0);
             }else{
               this.restaurantList=[]
               this.message='No Results found for the search criteria';
               this.loading=false;
-              this.status=404;
+              //this.status=404;
             }
           }
           
@@ -64,19 +67,21 @@ export class RestaurantListComponent implements OnInit, OnChanges {
     }else if(this.lat!=='' && this.lng!==''){
       this.zomatoService.getRestaurants({lat:this.lat,lng:this.lng},this.skip).subscribe(
         (response:any) => {
-          console.log(response);
+          //console.log(response);
           if(response.status===200){
             if(response.body.results_found>0){
               this.restaurantList = response.body.restaurants;
+              this.totalResults = response.body.results_found;
               //console.log(this.restaurantList)
               this.loading = false;
               this.message = null;
               this.status=null;
+              window.scrollTo(0,0);
             }else{
               this.restaurantList=[];
               this.message='No Results found for the search criteria';
               this.loading=false;
-              this.status=404;
+              //this.status=404;
             }
           }
           
